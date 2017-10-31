@@ -3,6 +3,7 @@
 # PlaceFinder
 
 Check out the [Live Demo](http://www.seanoreilly.co/placeFinder)
+To enable GeoLocation, clone the repo and run `open index.html` from the terminal.
 
 ## Technologies Used
 - Javascript (ES6)

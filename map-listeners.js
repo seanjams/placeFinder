@@ -21,7 +21,6 @@ google.maps.event.addDomListener(document, 'DOMContentLoaded', () => {
   //seed initial screen
   searchByKeyword(lastRequest, rankByDistance);
   //if browser supports geolocation, render map at user's location
-  console.log(navigator.geolocation);
   if (navigator.geolocation) getCurrentLocation();
 
   //ping API on submission of form
