@@ -1,0 +1,26 @@
+html, body, header, section, footer, a, h1, h2, h3, h4, img, nav, aside,
+ul, ol, li, figure, figcaption, p, form, label, input, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  list-style: none;
+  text-decoration: none;
+}
+
+button:focus, input:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+strong {
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.3em;
+}

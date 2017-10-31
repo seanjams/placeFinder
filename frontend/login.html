@@ -2,12 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Auth0 Tutorial</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./css-reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://use.fontawesome.com/4bfeaf5442.js"></script>
+    <script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4SohgWPlKFpF6KGHixA16IwcIAgPQgow&libraries=places">
+    </script>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./map.js"></script>
+    <title>Zenefits Coding Challenge</title>
   </head>
   <body>
-    <h1>Hi I'm your web application. Who are you?</h1>
-    <a href="auth/google">
-      <button>Google Login</button>
-    </a>
+    <div id="list-search-container">
+      <form id="search-form">
+        <button id="submit" type="submit" class="fa fa-2x fa-search"></button>
+        <input id="search" type="text" placeholder="Find a place" value="pizza">
+        <div id="rank-selector">
+          <span><input type="radio" name="rank" value="popularity" checked>Popularity</span>
+          <span><input type="radio" name="rank" value="distance">Distance</span>
+        </div>
+      </form>
+      <div id="list-shadow"></div>
+      <div id="list-container"><ul id="list"></ul></div>
+    </div>
+    <div id="map-container">
+      <div id="handle"></div>
+      <div id="map"></div>
+    </div>
   </body>
 </html>
