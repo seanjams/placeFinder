@@ -2,7 +2,7 @@ let infoWindow, service, userMarker, timer, currentBouncingMarker;
 let lastRequest = "pizza",
     rankByDistance = false,
     markers = [],
-    center = new google.maps.LatLng(40.7643401,-73.9817126);
+    center = new google.maps.LatLng(37.7758009,-122.4551182);
 
 
 
