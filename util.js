@@ -64,32 +64,6 @@ const infoWindowBuilder = place => {
           </div>`
 };
 
-const initResize = map => {
-  let pageWidth, isResizing;
-  const handle = document.getElementById('handle'),
-        left = document.getElementById('list-search-container'),
-        right = document.getElementById('map-container');
-
-  handle.addEventListener('mousedown', () => {
-    isResizing = true;
-    pageWidth = window.innerWidth;
-  });
-
-  document.addEventListener('mousemove', e => {
-    if (!isResizing) return;
-    let percentage = (100 * e.clientX / pageWidth).toFixed(1);
-    if (percentage > 70) percentage = 70;
-    left.style.width = `${percentage}%`;
-    right.style.width = `${100 - percentage}%`;
-    console.log(left.style.width, right.style.width);
-  });
-
-  document.addEventListener('mouseup', () => {
-    isResizing = false;
-    google.maps.event.trigger(map, "resize");
-  });
-};
-
 //calculates Havasine distance between map coordinates
 const distanceCalculator = (pos1, pos2) => {
   const r = 6371000; // metres

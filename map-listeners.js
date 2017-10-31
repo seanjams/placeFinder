@@ -17,10 +17,11 @@ google.maps.event.addDomListener(document, 'DOMContentLoaded', () => {
   service = new google.maps.places.PlacesService(map);
 
   //add event listeners to handle resize of list
-  initResize(map);
+  initResize();
   //seed initial screen
   searchByKeyword(lastRequest, rankByDistance);
   //if browser supports geolocation, render map at user's location
+  console.log(navigator.geolocation);
   if (navigator.geolocation) getCurrentLocation();
 
   //ping API on submission of form
@@ -74,6 +75,7 @@ const createMarker = place => {
   const li = document.createElement('li');
   li.innerHTML = listItemBuilder(place);
   list.appendChild(li);
+
   const marker = new google.maps.Marker({
     map,
     icon: markerIcon,
@@ -81,7 +83,7 @@ const createMarker = place => {
     position: place.geometry.location
   });
 
-  const callback = () => {
+  const activateMarker = () => {
     infoWindow.setContent(infoWindowBuilder(place));
     infoWindow.open(map, marker);
     if (currentBouncingMarker) stopBounce(currentBouncingMarker);
@@ -89,20 +91,9 @@ const createMarker = place => {
     map.panTo(marker.position);
   };
 
-  google.maps.event.addListener(marker, 'click', callback);
-  li.addEventListener('click', callback);
+  google.maps.event.addListener(marker, 'click', activateMarker);
+  li.addEventListener('click', activateMarker);
   return marker;
-};
-
-const stopBounce = marker => {
-  if (currentBouncingMarker) currentBouncingMarker = null;
-  if (marker.getAnimation() !== null) marker.setAnimation(null);
-};
-
-const startBounce = marker => {
-  currentBouncingMarker = marker;
-  if (marker.getAnimation() === null)
-    marker.setAnimation(google.maps.Animation.BOUNCE);
 };
 
 const clearMarkers = () => {
@@ -129,4 +120,41 @@ const searchByKeyword = (searchText, rankByDistance = false) => {
       res.forEach(el => markers.push(createMarker(el)));
     }
   });
+};
+
+const initResize = () => {
+  let pageWidth, isResizing;
+  const handle = document.getElementById('handle'),
+        left = document.getElementById('list-search-container'),
+        right = document.getElementById('map-container');
+
+  handle.addEventListener('mousedown', () => {
+    isResizing = true;
+    pageWidth = window.innerWidth;
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
+    let percentage = (100 * e.clientX / pageWidth).toFixed(1);
+    if (percentage > 70) percentage = 70;
+    left.style.width = `${percentage}%`;
+    right.style.width = `${100 - percentage}%`;
+    console.log(left.style.width, right.style.width);
+  });
+
+  document.addEventListener('mouseup', () => {
+    isResizing = false;
+    google.maps.event.trigger(map, "resize");
+  });
+};
+
+const stopBounce = marker => {
+  if (currentBouncingMarker) currentBouncingMarker = null;
+  if (marker.getAnimation() !== null) marker.setAnimation(null);
+};
+
+const startBounce = marker => {
+  currentBouncingMarker = marker;
+  if (marker.getAnimation() === null)
+    marker.setAnimation(google.maps.Animation.BOUNCE);
 };
