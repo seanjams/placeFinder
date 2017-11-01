@@ -1,4 +1,4 @@
-let infoWindow, service, userMarker, timer, currentBouncingMarker;
+let map, infoWindow, service, userMarker, timer, currentBouncingMarker;
 let lastRequest = "pizza",
     rankByDistance = false,
     markers = [],
@@ -138,7 +138,6 @@ const initResize = () => {
     if (percentage > 70) percentage = 70;
     left.style.width = `${percentage}%`;
     right.style.width = `${100 - percentage}%`;
-    console.log(left.style.width, right.style.width);
   });
 
   document.addEventListener('mouseup', () => {
