@@ -1,14 +1,14 @@
 export const maleIcon = {
-  url: './icons/man.png',
+  url: '../icons/man.png',
   scaledSize: new google.maps.Size(20, 60)
 },
 femaleIcon = {
-  url: './icons/woman.png',
+  url: '../icons/woman.png',
   scaledSize: new google.maps.Size(20, 60)
 },
 markerIcon = {
-  url: './icons/marker.svg',
-  scaledSize: new google.maps.Size(40, 40),
+  url: '../icons/marker.svg',
+  scaledSize: new google.maps.Size(40, 40)
 },
 ratingColor = {
   1: `#F00`,
@@ -25,7 +25,7 @@ hourColor = {
 export const infoWindowBuilder = place => {
   let noPhoto = !place.photos;
   let photo = noPhoto ? place.icon
-                  : place.photos[0].getUrl({maxWidth: 200, maxHeight: 200});
+                  : place.photos[0].getUrl({maxWidth: 150, maxHeight: 120});
   let rating = place.rating ? place.rating : "Unavailable";
   let openNow = "Hours Unavailable";
   if (place.opening_hours)

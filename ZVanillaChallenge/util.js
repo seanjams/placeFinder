@@ -1,13 +1,13 @@
 const maleIcon = {
-  url: './icons/man.png',
+  url: '../icons/man.png',
   scaledSize: new google.maps.Size(20, 60)
 },
 femaleIcon = {
-  url: './icons/woman.png',
+  url: '../icons/woman.png',
   scaledSize: new google.maps.Size(20, 60)
 },
 markerIcon = {
-  url: './icons/marker.svg',
+  url: '../icons/marker.svg',
   scaledSize: new google.maps.Size(40, 40),
 },
 ratingColor = {
@@ -25,20 +25,18 @@ hourColor = {
 const listItemBuilder = place => {
   let noPhoto = !place.photos;
   let photo = noPhoto ? place.icon
-                  : place.photos[0].getUrl({maxWidth: 200, maxHeight: 200});
+                  : place.photos[0].getUrl({maxWidth: 150, maxHeight: 120});
   let rating = place.rating ? place.rating : "Unavailable";
   let openNow = "Hours Unavailable";
   if (place.opening_hours)
     openNow = place.opening_hours.open_now ? "OPEN" : "CLOSED";
 
-  return `<div class="list-item">
-            <img src=${photo} alt=${place.name} class=${noPhoto ? "icon" : ""}>
-            <div class="list-item-info">
-              <h3>${place.name}</h3>
-                <p>${place.vicinity}</p>
-                <p>Rating: <span style="color:${ratingColor[parseInt(place.rating)]};">${rating}</span></p>
-                <p style="color:${hourColor[openNow]}">${openNow}</p>
-            </div>
+  return `<img src=${photo} alt=${place.name} class=${noPhoto ? "icon" : ""}>
+          <div class="list-item-info">
+            <h3>${place.name}</h3>
+              <p>${place.vicinity}</p>
+              <p>Rating: <span style="color:${ratingColor[parseInt(place.rating)]};">${rating}</span></p>
+              <p style="color:${hourColor[openNow]}">${openNow}</p>
           </div>`
 };
 

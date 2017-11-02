@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './search';
 import List from './list';
-import * as Util from './util';
+import * as Util from '../util';
 
 class Root extends React.Component {
   constructor(props) {
@@ -18,8 +18,8 @@ class Root extends React.Component {
       map: this.props.map,
       lastRequest: "",
       rankByDistance: false
-    }
-    this.service = new google.maps.places.PlacesService(this.props.map)
+    };
+    this.service = new google.maps.places.PlacesService(this.props.map);
     this.handleSearch = this.handleSearch.bind(this);
     this.activateMarker = this.activateMarker.bind(this);
     google.maps.event.addListener(this.state.infoWindow, 'closeclick', () => {
@@ -39,14 +39,14 @@ class Root extends React.Component {
         animation: google.maps.Animation.DROP,
         position: center
       });
-      this.setState({center, userMarker});
 
       google.maps.event.addListener(userMarker, 'click', () => {
         userMarker.setIcon(
-          userMarker.icon.url === './icons/man.png' ? femaleIcon : maleIcon
+          userMarker.icon.url === '../icons/man.png' ? femaleIcon : maleIcon
         );
       });
-
+      
+      this.setState({center, userMarker});
       map.panTo(center);
       this.handleSearch(lastRequest, rankByDistance);
     });
@@ -55,7 +55,7 @@ class Root extends React.Component {
       const { map, center, lastRequest, rankByDistance } = this.state;
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        if (Util.distanceCalculator(map.getCenter(), center) > 8047)
+        if (Util.distanceCalculator(map.getCenter(), center) > 10000)
           this.handleSearch(lastRequest, rankByDistance);
       }, 100);
     });

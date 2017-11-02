@@ -4,8 +4,6 @@ let lastRequest = "pizza",
     markers = [],
     center = new google.maps.LatLng(37.7758009,-122.4551182);
 
-
-
 google.maps.event.addDomListener(document, 'DOMContentLoaded', () => {
   const form = document.getElementById('search-form');
   const list = document.getElementById('list');
@@ -37,8 +35,9 @@ google.maps.event.addDomListener(document, 'DOMContentLoaded', () => {
   map.addListener('center_changed', () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      if (distanceCalculator(map.getCenter(), center) > 8047)
+      if (distanceCalculator(map.getCenter(), center) > 10000) {
         searchByKeyword(lastRequest, rankByDistance);
+      }
     }, 100);
   });
 
@@ -61,7 +60,7 @@ const getCurrentLocation = () => {
 
     google.maps.event.addListener(userMarker, 'click', () => {
       userMarker.setIcon(
-        userMarker.icon.url === './icons/man.png' ? femaleIcon : maleIcon
+        userMarker.icon.url === '../icons/man.png' ? femaleIcon : maleIcon
       );
     });
 
@@ -71,7 +70,8 @@ const getCurrentLocation = () => {
 };
 
 const createMarker = place => {
-  const li = document.createElement('li');
+  const li = document.createElement('div');
+  li.className = "list-item"
   li.innerHTML = listItemBuilder(place);
   list.appendChild(li);
 
@@ -138,6 +138,7 @@ const initResize = () => {
     if (percentage > 70) percentage = 70;
     left.style.width = `${percentage}%`;
     right.style.width = `${100 - percentage}%`;
+    console.log(percentage);
   });
 
   document.addEventListener('mouseup', () => {
@@ -147,9 +148,11 @@ const initResize = () => {
 };
 
 const stopBounce = () => {
-  if (currentBouncingMarker) currentBouncingMarker = null;
-  if (currentBouncingMarker.getAnimation() !== null)
-    currentBouncingMarker.setAnimation(null);
+  if (currentBouncingMarker) {
+    if (currentBouncingMarker.getAnimation() !== null)
+      currentBouncingMarker.setAnimation(null);
+    currentBouncingMarker = null;
+  }
 };
 
 const startBounce = marker => {

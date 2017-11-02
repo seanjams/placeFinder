@@ -18,7 +18,7 @@ const plugins = process.env.NODE_ENV === 'production' ? prodPlugins : []
 
 module.exports = {
   context: __dirname,
-  entry: './index.jsx',
+  entry: path.resolve(__dirname, 'components', 'index.jsx'),
   output: {
     path: path.resolve(__dirname),
     filename: 'bundle.js'
