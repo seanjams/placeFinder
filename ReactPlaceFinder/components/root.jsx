@@ -42,10 +42,10 @@ class Root extends React.Component {
 
       google.maps.event.addListener(userMarker, 'click', () => {
         userMarker.setIcon(
-          userMarker.icon.url === '../icons/man.png' ? femaleIcon : maleIcon
+          userMarker.icon.url === '../assets/icons/man.png' ? femaleIcon : maleIcon
         );
       });
-      
+
       this.setState({center, userMarker});
       map.panTo(center);
       this.handleSearch(lastRequest, rankByDistance);

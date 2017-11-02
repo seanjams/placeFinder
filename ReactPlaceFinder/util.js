@@ -1,14 +1,14 @@
-const maleIcon = {
-  url: '../icons/man.png',
+export const maleIcon = {
+  url: '../assets/icons/man.png',
   scaledSize: new google.maps.Size(20, 60)
 },
 femaleIcon = {
-  url: '../icons/woman.png',
+  url: '../assets/icons/woman.png',
   scaledSize: new google.maps.Size(20, 60)
 },
 markerIcon = {
-  url: '../icons/marker.svg',
-  scaledSize: new google.maps.Size(40, 40),
+  url: '../assets/icons/marker.svg',
+  scaledSize: new google.maps.Size(40, 40)
 },
 ratingColor = {
   1: `#F00`,
@@ -22,28 +22,10 @@ hourColor = {
   'CLOSED': `#C44`
 };
 
-const listItemBuilder = place => {
+export const infoWindowBuilder = place => {
   let noPhoto = !place.photos;
   let photo = noPhoto ? place.icon
                   : place.photos[0].getUrl({maxWidth: 150, maxHeight: 120});
-  let rating = place.rating ? place.rating : "Unavailable";
-  let openNow = "Hours Unavailable";
-  if (place.opening_hours)
-    openNow = place.opening_hours.open_now ? "OPEN" : "CLOSED";
-
-  return `<img src=${photo} alt=${place.name} class=${noPhoto ? "icon" : ""}>
-          <div class="list-item-info">
-            <h3>${place.name}</h3>
-              <p>${place.vicinity}</p>
-              <p>Rating: <span style="color:${ratingColor[parseInt(place.rating)]};">${rating}</span></p>
-              <p style="color:${hourColor[openNow]}">${openNow}</p>
-          </div>`
-};
-
-const infoWindowBuilder = place => {
-  let noPhoto = !place.photos;
-  let photo = noPhoto ? place.icon
-                  : place.photos[0].getUrl({maxWidth: 200, maxHeight: 200});
   let rating = place.rating ? place.rating : "Unavailable";
   let openNow = "Hours Unavailable";
   if (place.opening_hours)
@@ -63,7 +45,7 @@ const infoWindowBuilder = place => {
 };
 
 //calculates Havasine distance between map coordinates
-const distanceCalculator = (pos1, pos2) => {
+export const distanceCalculator = (pos1, pos2) => {
   const r = 6371000; // metres
   const lat1 = pos1.lat(), lon1 = pos1.lng(),
         lat2 = pos2.lat(), lon2 = pos2.lng();

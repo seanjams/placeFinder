@@ -1,45 +1,32 @@
-<!-- # Zenefits Coding Challenge -->
+# Zenefits Coding Challenge
 
-# PlaceFinder
+Thank you for inviting me to complete this coding challenge! I decided to implement my solution in two ways. The first way is with Vanilla Javascript, providing event listeners and manipulating the DOM directly. The second way uses React to render all components and handle events.
 
-Check out the [Live Demo](http://www.seanoreilly.co/placeFinder)
-To enable GeoLocation, clone the repo and run `open index.html` from the terminal.
-
-## Technologies Used
+### Technologies Used
 - Javascript (ES6)
 - Google Maps API
 - Google Places API
+- React.js
+- HTML5/CSS3
+- Webpack/Babel
+
+
+## Vanilla JS
+
+Navigate to `/VanillaPlaceFinder` and run `open index.html` in the terminal. Be sure to enable location services when the browser prompts for consent.
+
+## React
+
+Navigate to `/ReactPlaceFinder` and run the following commands in the terminal:
+
+1. `npm install` - Will install all dependencies and generate the necessary bundle.js file
+2. `open index.html`
+
+Again, be sure to enable location services when the browser prompts for consent.
 
 ## Features
-- Search by Distance or Popularity.
-- Map continuously populates search results as the user scrolls.
-- Resizable Location List
-- Custom Marker Icons
-
-## Coding Challenges
-```javascript
-const createMarker = place => {
-  const li = document.createElement('li');
-  li.innerHTML = listItemBuilder(place);
-  list.appendChild(li);
-
-  const marker = new google.maps.Marker({
-    map,
-    icon: markerIcon,
-    animation: google.maps.Animation.DROP,
-    position: place.geometry.location
-  });
-
-  const activateMarker = () => {
-    infoWindow.setContent(infoWindowBuilder(place));
-    infoWindow.open(map, marker);
-    if (currentBouncingMarker) stopBounce(currentBouncingMarker);
-    startBounce(marker);
-    map.panTo(marker.position);
-  };
-
-  google.maps.event.addListener(marker, 'click', activateMarker);
-  li.addEventListener('click', activateMarker);
-  return marker;
-};
-```
+- Users can search by keyword and filter results by distance or popularity.
+- Map continuously repopulates search results as user scrolls around.
+- Both list items and corresponding markers can be clicked to access an infoWindow, which can be clicked to open more information in another browser tab.
+- Custom Marker Icons for places and current location. Click on your location to personalize!
+- Resizable List and Map
