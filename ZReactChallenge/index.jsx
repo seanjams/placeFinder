@@ -1,42 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Search from './search';
-
-class Root extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      infoWindow: new google.maps.InfoWindow(),
-      service: new google.maps.places.PlacesService(this.props.map),
-      userMarker: null,
-      timer: null,
-      currentBouncingMarker: null,
-      markers: [],
-      center: this.props.center,
-      map: this.props.map
-    }
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  componentDidMount() {
-
-  }
-
-  handleSearch(lastRequest, rankByDistance) {
-    console.log(lastRequest, rankByDistance);
-  }
-
-
-
-  render() {
-    return (
-      <div>
-        <Search handleSearch={this.handleSearch} />
-
-      </div>
-    );
-  }
-}
+import Root from './root';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('list-search-container');
@@ -45,5 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
     center,
     zoom: 14,
   });
-  ReactDOM.render(<Root map={map} center={center}/>, root);
+  ReactDOM.render(<Root map={map} center={center} />, root);
+  initResize();
 });
+
+const initResize = () => {
+  let pageWidth, isResizing;
+  const handle = document.getElementById('handle'),
+        left = document.getElementById('list-search-container'),
+        right = document.getElementById('map-container');
+
+  handle.addEventListener('mousedown', () => {
+    isResizing = true;
+    pageWidth = window.innerWidth;
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
+    let percentage = (100 * e.clientX / pageWidth).toFixed(1);
+    if (percentage > 70) percentage = 70;
+    left.style.width = `${percentage}%`;
+    right.style.width = `${100 - percentage}%`;
+  });
+
+  document.addEventListener('mouseup', () => {
+    isResizing = false;
+    google.maps.event.trigger(map, "resize");
+  });
+};

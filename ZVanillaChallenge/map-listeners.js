@@ -44,7 +44,7 @@ google.maps.event.addDomListener(document, 'DOMContentLoaded', () => {
 
   //reset animation when closing infoWindow
   google.maps.event.addListener(infoWindow, 'closeclick', () => {
-    stopBounce(currentBouncingMarker);
+    stopBounce();
   });
 });
 
@@ -105,9 +105,9 @@ const clearMarkers = () => {
 
 const searchByKeyword = (searchText, rankByDistance = false) => {
   center = map.getCenter();
-  let prop = rankByDistance ? 'rankBy' : 'radius';
-  let value = rankByDistance ? google.maps.places.RankBy.DISTANCE : 8047;
-  let req = {
+  const prop = rankByDistance ? 'rankBy' : 'radius';
+  const value = rankByDistance ? google.maps.places.RankBy.DISTANCE : 8047;
+  const req = {
     location: center,
     [prop]: value,
     keyword: [searchText]
@@ -146,9 +146,10 @@ const initResize = () => {
   });
 };
 
-const stopBounce = marker => {
+const stopBounce = () => {
   if (currentBouncingMarker) currentBouncingMarker = null;
-  if (marker.getAnimation() !== null) marker.setAnimation(null);
+  if (currentBouncingMarker.getAnimation() !== null)
+    currentBouncingMarker.setAnimation(null);
 };
 
 const startBounce = marker => {

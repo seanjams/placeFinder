@@ -22,26 +22,6 @@ hourColor = {
   'CLOSED': `#C44`
 };
 
-export const listItemBuilder = place => {
-  let noPhoto = !place.photos;
-  let photo = noPhoto ? place.icon
-                  : place.photos[0].getUrl({maxWidth: 200, maxHeight: 200});
-  let rating = place.rating ? place.rating : "Unavailable";
-  let openNow = "Hours Unavailable";
-  if (place.opening_hours)
-    openNow = place.opening_hours.open_now ? "OPEN" : "CLOSED";
-
-  return `<div class="list-item">
-            <img src=${photo} alt=${place.name} class=${noPhoto ? "icon" : ""}>
-            <div class="list-item-info">
-              <h3>${place.name}</h3>
-                <p>${place.vicinity}</p>
-                <p>Rating: <span style="color:${ratingColor[parseInt(place.rating)]};">${rating}</span></p>
-                <p style="color:${hourColor[openNow]}">${openNow}</p>
-            </div>
-          </div>`
-};
-
 export const infoWindowBuilder = place => {
   let noPhoto = !place.photos;
   let photo = noPhoto ? place.icon
