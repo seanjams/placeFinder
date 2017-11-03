@@ -1,6 +1,6 @@
-# Zenefits Coding Challenge
+# PlaceFinder
 
-Thank you for inviting me to complete this coding challenge! I decided to implement my solution in two ways. The first way is with Vanilla Javascript, providing event listeners and manipulating the DOM directly. The second way uses React to render all components and handle events.
+PlaceFinder uses Google Maps API and Google Places API to produce a simple search form, with a list of results and marked locations on the map. This repository contains two versions of the app. The first version is done with Vanilla Javascript, providing event listeners and manipulating the DOM directly. The second version uses React to render all components and handle events. While the implementation of each is quite different, the result is identical!
 
 ### Technologies Used
 - Javascript (ES6)
