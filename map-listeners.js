@@ -60,7 +60,7 @@ const getCurrentLocation = () => {
 
     google.maps.event.addListener(userMarker, 'click', () => {
       userMarker.setIcon(
-        userMarker.icon.url === '../assets/icons/man.png' ? femaleIcon : maleIcon
+        userMarker.icon.url === './assets/icons/man.png' ? femaleIcon : maleIcon
       );
     });
 
