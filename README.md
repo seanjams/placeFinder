@@ -1,5 +1,7 @@
 # PlaceFinder
 
+[Live Demo](http://www.seanoreilly.co/placefinder)
+
 PlaceFinder uses Google Maps API and Google Places API to produce a simple search form, with a list of results and marked locations on the map. This repository contains two versions of the app. The first version is done with Vanilla Javascript, providing event listeners and manipulating the DOM directly. The second version uses React to render all components and handle events. While the implementation of each is quite different, the result is identical!
 
 ### Technologies Used
